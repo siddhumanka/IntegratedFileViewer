@@ -1,16 +1,18 @@
 package com.concord.convert;
+import java.io.*;
 
-import org.apache.poi.hssf.*;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 public class ConvertHTML implements ConvertFile {
 
 	@Override
-	public String Convert(String inputPath, String outputPath) {
+	public String Convert(String inputPath, String outputPath) throws IOException {
 		int nos;
 		POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(inputPath));
 		HSSFWorkbook workbook = new HSSFWorkbook(fileSystem);
-		nos= HSSFWorkbook.getNumberOfSheets();
+		nos = workbook.getNumberOfSheets();
+		workbook.close();
 		return outputPath;
 	}
 
