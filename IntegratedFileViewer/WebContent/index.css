@@ -1,0 +1,37 @@
+@CHARSET "UTF-8";
+h3 {
+    color: blue;
+    text-align: center;
+}
+h2 {
+    color: black;
+    text-align: center;
+}
+
+input, button {
+  outline: none;
+  border: none;
+}
+div {
+    width: 320px;
+    padding: 10px;
+    border: 5px solid gray;
+    margin: 50px;
+    text-align: center;
+    
+}
+
+.login_submit {
+  position: relative;
+  width: 50%;
+  height: 2rem;
+  margin: 1rem  0 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  background: #803380;
+  font-size: 1rem;
+  border-radius: 3rem;
+  cursor: pointer;
+  overflow: hidden;
+  -webkit-transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+  transition: width 0.3s 0.15s, font-size 0.1s 0.15s;
+}
