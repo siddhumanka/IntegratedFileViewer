@@ -16,5 +16,10 @@ public class ConvertPDF implements ConvertFile {
 		}
 		return outputPath;
 	}
+	public void display (String outputPath)
+	{
+		
+		
+	}
 
 }

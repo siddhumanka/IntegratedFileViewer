@@ -7,5 +7,10 @@ public class ConvertNone implements ConvertFile {
 		// TODO Auto-generated method stub
 		return outputPath;
 	}
+	public void display (String outputPath)
+	{
+		
+		
+	}
 
 }
