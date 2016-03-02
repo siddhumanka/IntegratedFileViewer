@@ -2,7 +2,6 @@ package com.concord.typecheck;
 
 import java.io.File;
 import java.io.IOException;
-
 import org.apache.tika.Tika;
 
 //import type.String;
