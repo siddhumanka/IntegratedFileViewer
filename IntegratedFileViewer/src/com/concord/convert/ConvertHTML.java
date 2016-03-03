@@ -8,7 +8,7 @@ ache.poi.poifs.filesystem.POIFSFileSystem;import org.apache.poi.poifs.filesystem
 public class ConvertHTML implements ConvertFile {
 
 	@Override
-	public String Convert(String inputPath, String outputPath) throws IOException 
+	public String convert(String inputPath) throws IOException 
 	{
 		int nos;
 		POIFSFileSystem fileSystem = new POIFSFileSystem(new FileInputStream(inputPath));

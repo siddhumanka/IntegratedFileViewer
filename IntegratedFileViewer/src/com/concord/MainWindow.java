@@ -8,10 +8,10 @@ import com.concord.convert.ConvertNone;
 import com.concord.convert.ConvertPDF;
 import com.concord.typecheck.TypeCheck;
 public class MainWindow {
-		static String inputPath;
-		static String outputPath;
-		static String type;
-		static File input = new File(inputPath);
+		String inputPath;
+		String outputPath;
+		String type;
+		File input = new File(inputPath);
 		public static void error(){
 			//error handling code
 		}
@@ -27,16 +27,16 @@ public class MainWindow {
    	    case "application/vnd.oasis.opendocument.text": //odt
    	    case "application/vnd.ms-powerpoint":   //ppt
    	    case "application/vnd.openxmlformats-officedocument.presentationml.presentation":  //pptx
-   	    	ConvertPDF c= new ConvertPDF();
-   	    	c.Convert(inputPath,outputPath);
+   	    	ConvertPDF convertPDF= new ConvertPDF();
+   	    	outputPath=convertPDF.convert(inputPath);
    	    	break;
    	    	//xls, xlsx, csv,ods
    	 case "text/csv": //csv
      case "application/vnd.ms-excel": //xls
 	 case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": //xlsx
 	 case "application/vnd.oasis.opendocument.spreadsheet": //ods
-		ConvertHTML h = new ConvertHTML();
-		h.Convert(inputPath, outputPath);
+		ConvertHTML convertHTML = new ConvertHTML();
+		outputPath=convertHTML.convert(inputPath);
 		break;
 	 case "application/xhtml+xml": //xhtml
 	 case "text/html":  //html
@@ -48,8 +48,8 @@ public class MainWindow {
 	 case "image/x-ms-bmp": //bmp
 	 case "image/jpeg":  //jpg
 	 case "image/png": //png
-		 ConvertNone n =new ConvertNone();
-		 n.Convert(inputPath, outputPath);
+		 ConvertNone convertNone =new ConvertNone();
+		 outputPath=convertNone.convert(inputPath);
 		break;
 		
 	default: 
