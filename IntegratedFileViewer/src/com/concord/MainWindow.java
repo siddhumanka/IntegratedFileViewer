@@ -3,24 +3,34 @@ package com.concord;
 import java.io.File;
 import java.io.IOException;
 
+import java.io.FileOutputStream;
+
+import java.io.InputStream;
+import java.io.OutputStream;
+ 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import com.sun.jersey.core.header.FormDataContentDisposition;
+import com.sun.jersey.multipart.FormDataParam;
 import com.concord.convert.ConvertHTML;
 import com.concord.convert.ConvertNone;
 import com.concord.convert.ConvertPDF;
 import com.concord.typecheck.TypeCheck;
 public class MainWindow
 {
-		static String inputPath;
-		static String outputPath;
-		static String type;
-		static File input = new File(inputPath);
 		public static void error()
 		{
 			//error handling code
 		}
-		public static void main(String[] args) throws IOException
+		public String call(File inputFile) throws IOException
 		{
-		
-			type = TypeCheck.check(input);
+			String inputPath=inputFile.getAbsolutePath();
+			String outputPath;
+			String type;
+			type = TypeCheck.check(inputFile);
 			
 			switch (type)
 			{
@@ -31,7 +41,7 @@ public class MainWindow
 	   	    case "application/vnd.ms-powerpoint":   //ppt
 	   	    case "application/vnd.openxmlformats-officedocument.presentationml.presentation":  //pptx
 	   	    	ConvertPDF c= new ConvertPDF();
-	   	    	c.Convert(inputPath,outputPath);
+	   	    	outputPath=c.convert(inputPath);
 	   	    	break;
 	   	    	//xls, xlsx, csv,ods
 	   	    case "text/csv": //csv
@@ -39,7 +49,7 @@ public class MainWindow
 	   	    case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": //xlsx
 	   	    case "application/vnd.oasis.opendocument.spreadsheet": //ods
 	   	    	ConvertHTML h = new ConvertHTML();
-	   	    	h.Convert(inputPath, outputPath);
+	   	    	outputPath=h.convert(inputPath);
 	   	    	break;
 	   	    case "application/xhtml+xml": //xhtml
 	   	    case "text/html":  //html
@@ -52,12 +62,13 @@ public class MainWindow
 	   	    case "image/jpeg":  //jpg
 	   	    case "image/png": //png
 			 ConvertNone n =new ConvertNone();
-			 n.Convert(inputPath, outputPath);
+			 outputPath=n.convert(inputPath);
 			 break;
 			
 	   	    default: 
 	   	    	error();
 			}
+			return outputPath;
 		
 		}
 }
