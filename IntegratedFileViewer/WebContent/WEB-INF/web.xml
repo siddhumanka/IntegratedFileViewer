@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
-  <display-name>IntegratedFileViewer</display-name>
+<?xml version="1.0" encoding="UTF-8"?>  
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee   
+http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
@@ -9,19 +9,22 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-    <servlet>
-    <servlet-name>HelloWorld1</servlet-name>
-    <servlet-class>HelloWorld</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>HelloWorld1</servlet-name>
-    <url-pattern>/HelloWorld1</url-pattern>
-  </servlet-mapping>
-  <context-param>
-    <description>Location to store uploaded file</description>
-    <param-name>file-upload</param-name>
-    <param-value>
-         /home/siddhu/eclipse/apache-tomcat-8.0.30/webapps/data 
-     </param-value>
-  </context-param>
-</web-app>
+    <servlet>  
+    <servlet-name>Jersey REST Service</servlet-name>  
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>  
+     <init-param>  
+        <param-name>jersey.config.server.provider.packages</param-name>  
+        <param-value>com.concord</param-value>  
+    </init-param>  
+    <init-param>  
+    <param-name>jersey.config.server.provider.classnames</param-name>  
+    <param-value>org.glassfish.jersey.filter.LoggingFilter;  
+     org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>  
+</init-param>  
+    <load-on-startup>1</load-on-startup>  
+  </servlet>  
+  <servlet-mapping>  
+    <servlet-name>Jersey REST Service</servlet-name>  
+    <url-pattern>/com/concord/*</url-pattern>  
+  </servlet-mapping>   
+</web-app>   

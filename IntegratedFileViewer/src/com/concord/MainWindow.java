@@ -19,16 +19,48 @@ import com.concord.convert.ConvertHTML;
 import com.concord.convert.ConvertNone;
 import com.concord.convert.ConvertPDF;
 import com.concord.typecheck.TypeCheck;
+
+@Path("main")
 public class MainWindow
 {
 		public static void error()
 		{
 			//error handling code
 		}
+		private final String FOLDER_PATH = "/home/siddhu/git/IntegratedFileViewer/IntegratedFileViewer/WebContent/userUploads/";
+		@POST
+	    @Path("/upload")
+	    @Consumes(MediaType.MULTIPART_FORM_DATA)
+	    @Produces(MediaType.TEXT_PLAIN)
+	    public String uploadFile(@FormDataParam("file") InputStream fis,
+	                    @FormDataParam("file") FormDataContentDisposition fdcd) throws IOException {
+			
+	        OutputStream outpuStream = null;
+	        String fileName = fdcd.getFileName();
+	        System.out.println("File Name: " + fdcd.getFileName());
+	        String filePath = FOLDER_PATH + fileName;
+	         
+	            int read = 0;
+	            byte[] bytes = new byte[1024];
+	            outpuStream = new FileOutputStream(new File(filePath));
+	            while ((read = fis.read(bytes)) != -1) {
+	                outpuStream.write(bytes, 0, read);
+	                }
+	            outpuStream.flush();
+	            outpuStream.close();
+	            
+	            
+	        //} finally {
+	            if(outpuStream != null){
+	               System.out.println("File Uploaded");
+	            }
+	            String convertedFilePath=call(new File(filePath));
+	        return convertedFilePath;
+	    }
 		public String call(File inputFile) throws IOException
 		{
 			String inputPath=inputFile.getAbsolutePath();
-			String outputPath;
+			String outputPath="";
 			String type;
 			type = TypeCheck.check(inputFile);
 			
