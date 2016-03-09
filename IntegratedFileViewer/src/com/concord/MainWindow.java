@@ -96,7 +96,6 @@ public class MainWindow
 			 ConvertNone n =new ConvertNone();
 			 outputPath=n.convert(inputPath);
 			 break;
-			
 	   	    default: 
 	   	    	error();
 			}
